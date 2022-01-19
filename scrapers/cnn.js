@@ -11,10 +11,9 @@ request({
 }, (err, res, body) => {
 
     if (err) return console.error(err);
-    write.sync('cnn.txt', body, { newline: true }); 
     let $ = cheerio.load(body);
     let headlines = [];
-    $('div').each(function (i, e) {
+    $('h2').each(function (i, e) {
         var post = $(this)[0];
         console.log(post);
         headlines[i] = $(this).text();
