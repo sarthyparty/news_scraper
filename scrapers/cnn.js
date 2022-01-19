@@ -1,6 +1,8 @@
 const cheerio = require('cheerio');
 const { last } = require('cheerio/lib/api/traversing');
 const request = require('request');
+const write = require('write');
+
 
 request({
     
@@ -9,6 +11,7 @@ request({
 }, (err, res, body) => {
 
     if (err) return console.error(err);
+    write.sync('cnn.txt', body, { newline: true }); 
     let $ = cheerio.load(body);
     let headlines = [];
     $('div').each(function (i, e) {
